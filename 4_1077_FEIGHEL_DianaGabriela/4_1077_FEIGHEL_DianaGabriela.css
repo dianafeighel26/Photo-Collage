@@ -1,0 +1,210 @@
+/*
+definire font niconne
+*/
+@font-face {
+    font-family: "niconne";
+    src: url("./media/fonts/niconne/Niconne-Regular.ttf");
+}
+
+nav .logo {
+    color: #FFFFFF;
+    background-color: #CDB982;
+    display: inline-block;
+    position: absolute;
+    padding: 10px;
+    font: bold 28px niconne;
+    left: calc(6% + 74px);
+}
+
+#canvasAnim {
+    position: relative;
+    left: 154px;
+}
+
+
+body {
+    background-color: antiquewhite;
+}
+
+nav {
+    margin: 0 6%;
+}
+
+hr {
+    display: block;
+    border: 1px solid #CDB982;
+    margin-top: 0;
+}
+
+#colaj {
+    background: #F3EDE0;
+    position: relative;
+    top:10%;
+    left: 10%;
+}
+
+#btnSalveaza{
+    bottom:3%;
+    left:43%;
+    position: absolute;
+    border-radius: 50%;
+    background-color:#CDB982;
+    text-align: center;
+    color:#F3EDE0;
+    font: bold 30px niconne;
+    width: 120px;
+    height: 50px;
+    border: 2px solid #FFFFFF;
+    
+
+    /*efect de ripple cand se apasa butonul*/
+    opacity: 1;
+    transition: opacity 0.1s; 
+    
+    
+}
+
+#btnSalveaza:active{
+    opacity: 0.5;
+}
+
+#btnSalveaza:hover{
+    background-color:#F3DCB0 ;
+    color:#CDB982;
+   
+}
+
+
+#laterala_stanga {
+    overflow: auto;  /*pentru a avea scroll*/
+    position: relative;
+    height: 800px;
+    width: 25%;
+    border: 1px solid #CDB982;
+    margin-left: 6%;
+    margin-right: 10px;
+    background-color: #CDB982;
+}
+
+#centru {
+    height: 800px;
+    width: 67%;
+    border: 1px solid #CDB982;
+    margin-right: 6%;
+    position: relative;
+}
+
+#container {
+    position: relative;
+    display: flex;
+}
+
+.imagini{
+    width: 90%;
+    height: auto;
+    margin-top: 50px;
+    display: block;
+    /*pentru a fi centrate*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imagini:hover{
+    cursor: pointer;
+}
+
+.imagini:first-child{
+    margin-top:10px;
+}
+
+.imagini:last-child{
+    margin-bottom:10px;
+}
+
+
+/*popup editare poza*/
+
+.popup{
+    border:2px solid rgb(138, 116, 55);
+    position: absolute;
+    right: 1%;
+    width:15%;
+    top: 10%;
+    background-color: rgb(192, 172, 117);
+    height: 45%;
+    display: none;
+}
+/*titlu popup*/
+.popup h2{
+    color:white;
+    text-align: center;
+    font-family:niconne ;
+}
+
+#canvasEditare{
+    margin-left: 15%;
+}
+
+.butoaneFiltreDiv{
+    overflow: auto; /*pentru scroll*/
+    display: flex;
+}
+
+.butoaneFiltre{
+    height: 30px;
+    width: 70px;
+    min-width:100px;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+    text-align: center;
+    color:#F3EDE0;
+    font: normal 15px niconne;
+    background-color:#CDB982;
+    margin-right: 10px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+
+/*pentru chrome*/
+::-webkit-scrollbar {
+    width:15px;
+}
+
+::-webkit-scrollbar-track{
+    box-shadow: inset 0 0  4px rgb(138, 117, 59);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgb(177, 150, 77);
+    border-radius: 10px;
+}
+
+/*buton inchidere popup*/
+#inchiderePopup{
+    font-size: 15px;
+    background: rgb(177, 150, 77);
+    color:white;
+    margin-left: 86%;
+    border:2px solid white;
+    border-radius: 20%;
+}
+
+
+#btnSalveazaFiltru{
+    height: 10%;
+    width: 50%;
+    color:white;
+    background-color: #CDB982 ;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: 25%;
+    margin-top: 10%;
+    font: bold 20px niconne;
+}
+
+
+
+
