@@ -4,8 +4,7 @@ function func(){
     const canvas = document.querySelector('#colaj');
 
     //potrivire canvas colaj in div-ul centru 
-    function potrivireInContainer(){
-        //inaltime si latimea setata de aici
+    function potrivireInContainer() {
         canvas.style.width='80%'; 
         canvas.style.height='80%';
         //returneaza latimea si inaltimea in pixeli
@@ -29,7 +28,7 @@ function func(){
 
     function desenareColaj(structuriVector){
         
-        context.strokeStyle='#DACBA1';   //setare culoare dreptunghi
+        context.strokeStyle='#DACBA1';   
         context.lineWidth=15;
         for(var i=0;i<structuriVector.length;i++){
             
@@ -37,9 +36,7 @@ function func(){
                 structuriVector[i].y,
                 structuriVector[i].latime ,
                 structuriVector[i].inaltime );
-                //desenare dreptunghi pentru poza
                 
-                //scriere mesaj drag and drop 
                 context.font = "20px niconne";
                 context.fillStyle="#CDB982";
                 context.textAlign="center";
@@ -161,8 +158,7 @@ function func(){
    vector14.push(new structura(0,H/2,2*W/3,H/2));
    vector14.push(new structura(2*W/3,0,W/3,H));
    //desenareColaj(vector14);
-
-   //vectorul care contine toate colajele
+    
    var vectorAll = [];
    vectorAll.push(vector1);
    vectorAll.push(vector2);
@@ -191,15 +187,14 @@ function func(){
            desenareColaj(vectorAll[parseInt(idd)]);
            sablonActiv = vectorAll[parseInt(idd)]; //setare sablon ales de utilizator
             for(var j=0;j<sablonActiv.length;j++){
-                vectorAreImagine[j] = false;  //setez pe false vectorul in care spun daca un sablon contine poza pe pozitia j
+                vectorAreImagine[j] = false; 
             }
-            //sunet pentru selectarea colajului
             var sound = document.querySelector('#buttonsound');
             sound.play();
        });
    }
    
-    //functie desenare imagine(imaginea, indexul in vector)
+  
     function desenareImagine(imagine, index){
         context.drawImage(imagine,
             sablonActiv[index].x,
@@ -208,20 +203,19 @@ function func(){
             sablonActiv[index].inaltime );   
     }
 
-   //drag and drop
-   $.event.props.push("dataTransfer"); //introducerea proprietatii dataTransfer
+
+   $.event.props.push("dataTransfer"); 
 
    $(document).ready(function(){
     var mouseX,mouseY;
 
     $(document).on('dragover', (e) => {
         e.preventDefault();  
-    });  //dragover = evenimentul activat cand un element sau o selectie de text este trasa inspre canvas
+    });  
     $(document).on('drop', (e) => {
         e.preventDefault();
-        if(e.dataTransfer.files.length > 0){ //lista de fisiere care iau parte la operatiunea drag and drop
-            var fileReader = new FileReader();  //pt a citi continutul imaginii
-            //preluare coordonate mouse
+        if(e.dataTransfer.files.length > 0){ 
+            var fileReader = new FileReader(); 
             mouseX=e.clientX - canvas.getBoundingClientRect().left;
             mouseY=e.clientY - canvas.getBoundingClientRect().top;
             fileReader.onload= function(e){
@@ -232,11 +226,11 @@ function func(){
                         && (mouseX <= sablonActiv[i].x + sablonActiv[i].latime)
                         && (mouseY >= sablonActiv[i].y)
                         && (mouseY <= sablonActiv[i].y + sablonActiv[i].inaltime)){
-                            vectorAreImagine[i]=true;  //s-a desenat o imagine pe o bucata din sablon
+                            vectorAreImagine[i]=true; 
                             vectorImaginiDesenate[i]=$("<img></img>")
-                            .attr("src",e.target.result)[0];  //salvare imagini desenate  pt a putea folosi imaginea in canvasEditare
+                            .attr("src",e.target.result)[0]; 
                             indice=i;
-                            //sa incarc imaginea si la load sa apelez desenare
+                            
                             $("<img></img>").attr("src",e.target.result).on('load',() => {
                                 desenareImagine(vectorImaginiDesenate[indice],indice);
                             });
@@ -244,13 +238,12 @@ function func(){
                         }  
                     }
             };
-            //contine o functie a unui eveniment executata atunci cand  evenimentul load se intampla
-            fileReader.readAsDataURL(e.dataTransfer.files[0]);    //returneaza continutul fisierului ca o data URL
+           
+            fileReader.readAsDataURL(e.dataTransfer.files[0]);   
         }
     });
    });
 
-   //Salvare imagine prin apasarea  butonului salveaza
    var buttonSalveaza= document.querySelector('#btnSalveaza');
    buttonSalveaza.addEventListener('click', () => {
         var elemA = document.createElement('a');
@@ -260,12 +253,12 @@ function func(){
         elemA.style.display='none'; 
         elemA.click(); 
 
-        //sunet pentru apasarea butonului salveaza
+      
         var sound = document.querySelector('#clicksound');
         sound.play();
    });
    
-   //afisare popup editare imagini
+
    var copieVectorData=[];  //vector folosit pentru a copia vectorul data initial daca se selecteaza efect dupa efect
 
    var canvasEditare = document.querySelector('#canvasEditare');
@@ -273,12 +266,12 @@ function func(){
    var HEditare=canvasEditare.height;
    var contextEditare = canvasEditare.getContext('2d');
 
-   var pozitieImgDesenata ; //index imagine editata
+   var pozitieImgDesenata ; 
    var popupElem = document.querySelector('.popup');
    var vectorAreImagine=[];
    var vectorImaginiDesenate= [];
    canvas.addEventListener('click', (e) => {
-       //calculare pozitie mouse
+ 
     mouseX=Math.round(e.clientX - canvas.getBoundingClientRect().left);
     mouseY=Math.round(e.clientY - canvas.getBoundingClientRect().top);
     len=sablonActiv.length;
@@ -287,30 +280,29 @@ function func(){
                         && (mouseX <= sablonActiv[i].x + sablonActiv[i].latime)
                         && (mouseY >= sablonActiv[i].y)
                         && (mouseY <= sablonActiv[i].y + sablonActiv[i].inaltime)){
-                            //am dat click pe casuta i din sablon
+                           
                             if(vectorAreImagine[i] === true){
-                                popupElem.style.display='block';  //afisare popup editare poza
-                                pozitieImgDesenata=i;  //salvare index imagine editata
-                                contextEditare.drawImage(vectorImaginiDesenate[i],0,0,   //desenareimagine in popup editare
+                                popupElem.style.display='block';  
+                                pozitieImgDesenata=i;  
+                                contextEditare.drawImage(vectorImaginiDesenate[i],0,0,  
                                     WEditare,HEditare);
-                                copieVectorData = contextEditare.getImageData(0,0,WEditare,HEditare).data; //copiere vector data initial 
+                                copieVectorData = contextEditare.getImageData(0,0,WEditare,HEditare).data; 
                             }
                         }
                     }});
-    //inchidere popup
+
     var btnInchiderePopup= document.querySelector('#inchiderePopup');
     btnInchiderePopup.addEventListener('click',()=>{
         popupElem.style.display = 'none';
     });
-    
- //functii aplicare filtre culoare
-var filtruFinal; //var folosita pt a edita imaginea din colaj cu filtrul final ales de utilizator
+
+var filtruFinal; 
 function aplicareFiltruRosu(cont,wE,hE,xE,yE,vectorData){
     var vC = new Uint8ClampedArray(vectorData);
     for(var i = 0;i < wE * hE * 4; i += 4){
         vC[i] = 255;
     }
-    cont.putImageData(new ImageData(vC,wE,hE),xE,yE);  //modificare vector data
+    cont.putImageData(new ImageData(vC,wE,hE),xE,yE);  
 }
 
 var btnFiltruRosu=document.querySelector('#filtruRosu');
@@ -368,7 +360,7 @@ btnFiltruGri.addEventListener('click',()=>{
     filtruFinal=4;
 });
 
-//salvare imagine editata in colaj 
+
 var btnSalveazaFiltru = document.querySelector('#btnSalveazaFiltru');
 btnSalveazaFiltru.addEventListener('click', () => {
 
@@ -414,13 +406,13 @@ btnSalveazaFiltru.addEventListener('click', () => {
                                     sablonActiv[pozitieImgDesenata].inaltime).data);
                         break;
     }
-     popupElem.style.display = "none";  //inchidere popup editare la apasarea butonului salveaza
+     popupElem.style.display = "none";  
 
-     //sunet pentru buton salvare
+
      var soundedit = document.querySelector('#buttoneditsound');
      soundedit.play();
 
-      //punere imagine tocmai modificata in vectorimaginidesenate pt actualizarea imaginii din popup
+     
       var helpingCanvas = document.createElement("canvas");
       helpingCanvas.width = sablonActiv[pozitieImgDesenata].latime;
       helpingCanvas.height = sablonActiv[pozitieImgDesenata].inaltime;
@@ -429,10 +421,10 @@ btnSalveazaFiltru.addEventListener('click', () => {
                                              sablonActiv[pozitieImgDesenata].latime,
                                              sablonActiv[pozitieImgDesenata].inaltime,0,0,
                                              sablonActiv[pozitieImgDesenata].latime,
-                                             sablonActiv[pozitieImgDesenata].inaltime); //desenare imagine tocmai modificata in canvasul ajutator
-     var imgNoua = document.createElement("img");  //creare element img
-     imgNoua.src = helpingCanvas.toDataURL();   //atribuire vector data
-     vectorImaginiDesenate[pozitieImgDesenata] = imgNoua;  //schimbare poza in vector imagini desenate
+                                             sablonActiv[pozitieImgDesenata].inaltime);
+     var imgNoua = document.createElement("img");  
+     imgNoua.src = helpingCanvas.toDataURL();  
+     vectorImaginiDesenate[pozitieImgDesenata] = imgNoua;  
 });
 
 //1.Model
