@@ -3,11 +3,10 @@ document.addEventListener('DOMContentLoaded',func);
 function func(){
     const canvas = document.querySelector('#colaj');
 
-    //potrivire canvas colaj in div-ul centru 
     function potrivireInContainer() {
         canvas.style.width='80%'; 
         canvas.style.height='80%';
-        //returneaza latimea si inaltimea in pixeli
+        
         canvas.height=canvas.offsetHeight;
         canvas.width=canvas.offsetWidth;
     }
